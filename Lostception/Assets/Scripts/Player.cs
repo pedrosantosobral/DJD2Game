@@ -31,6 +31,12 @@ public class Player : MonoBehaviour
         CheckForContinueDialogueClick();
     }
 
+
+    public void StartAnimations()
+    {
+        
+    }
+
     private void CheckForInteractible()
     {
         if (Physics.Raycast(_camera.transform.position,
@@ -52,8 +58,6 @@ public class Player : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0) && _currentInteractible != null)
         {
-            if (_currentInteractible.isDialogueTrigger)
-                _currentInteractible.TriggerDialogue();
             if (_currentInteractible.isPickable)
                 AddToInventory(_currentInteractible);
             else if (HasRequirements(_currentInteractible))
@@ -62,9 +66,10 @@ public class Player : MonoBehaviour
     }
     private void CheckForContinueDialogueClick()
     {
-        if (Input.GetKeyDown(KeyCode.C) && _currentInteractible.isDialogueTrigger)
+        if (Input.GetKeyDown(KeyCode.C))
         {
-                _currentInteractible.GoNextSentense();
+            FindObjectOfType<Interactible>().GoNextSentense();
+            Debug.Log("EnterCode In");
         }
     }
 

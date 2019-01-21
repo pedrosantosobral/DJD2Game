@@ -1,8 +1,10 @@
-﻿using UnityEngine;
+﻿using UnityEngine.Audio;
+using UnityEngine;
 //using UnityEngine.UI;
 
 public class Interactible : MonoBehaviour
 {
+    public AudioSource activeSound;
     public bool isInteractive;
     public bool isActive;
     public bool isPickable;
@@ -17,6 +19,9 @@ public class Interactible : MonoBehaviour
     public Interactible[] indirectActivations;
     public Dialogue dialogue;
 
+
+      
+
     public void Activate()
     {
         isActive = true;
@@ -27,9 +32,13 @@ public class Interactible : MonoBehaviour
     public void Interact()
     {
         if (isActive)
+        {
             InteractActive();
+        }
         else
+        {
             InteractInactive();
+        }
     }
 
     private void InteractActive()
@@ -40,8 +49,15 @@ public class Interactible : MonoBehaviour
 
         ActivateIndirects();
 
+        TriggerDialogueCondition();
+
         if (!allowsMultipleInteractions)
+        {
+            isActive = false;
+            isDialogueTrigger = false;
             isInteractive = false;
+        }
+        activeSound.Play();
     }
 
     private void InteractInactive()
@@ -75,6 +91,14 @@ public class Interactible : MonoBehaviour
         }
     }
 
+    public void TriggerDialogueCondition()
+    {
+        if (isDialogueTrigger)
+        {
+            TriggerDialogue();
+        }
+
+    }
     public void TriggerDialogue()
     {
         FindObjectOfType<DialogueManager>().StartDialogue(dialogue);

@@ -31,6 +31,8 @@ public class DialogueManager : MonoBehaviour {
             sentenses.Enqueue(sentense);
         }
 
+        Debug.Log("Start Conversation with " + dialogue.name);
+
         DisplayNextSentense();
     }
 
@@ -60,6 +62,7 @@ public class DialogueManager : MonoBehaviour {
     void EndDialogue()
     {
         animator.SetBool("IsOpen", false);
+        Debug.Log("end conversation");
     }
 
 }
