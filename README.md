@@ -55,7 +55,7 @@ yield return null;
 ```
 
 ##### Diagrama UML:
-![UML](UML.svg)
+![UML](UML.png)
 
 ### Referências
 * Código de referência das aulas de Desenvolvimento de Jogos Digitais II;
